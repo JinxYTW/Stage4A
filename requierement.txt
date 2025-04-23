@@ -1,0 +1,6 @@
+https://docs.ultralytics.com/fr/quickstart/#modifying-settings
+
+pip install opencv-python
+
+pip install torchmetrics
+

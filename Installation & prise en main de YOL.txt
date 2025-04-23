@@ -1,0 +1,155 @@
+# Modif à faire pour local :
+- A part les bonnes installations à faire, il faut juste changer les routes.
+
+# Proposition par FESB
+
+Installation & prise en main de YOLO :
+- Local( passage par environnement conda)
+> Installation longue
+> En prévision d'un lancement de modèle en local et test perso
+> Création d'un environnement virtuel yolo
+> Possibilité de le faire tourner sur une caméra
+
+
+- Colab (simple ?)
+> Compréhension des différentes lignes de codes possibles
+> Initialisation d'un notebook prêt à l'emploi
+> Mise en place d'un notebook pour Yolo
+> Importation d'un dataset personnalisée
+> Partage en test et vérification
+> Possibilité d'export de l'IA
+
+
+- Docker (Mis de côté pour l'instant dû à manque d'aisance)
+> Abandon
+
+-Lecture doc COCO
+
+# Deformable-DETR
+- Lecture de la méthode Deformable-DTR 
+- Essai implémentation dut git fundamentalvision
+- Passage à la version huggingface qui est plus à jour
+- Ponit faible : Nécessite du stockage ou bien j'ai mal codé un truc
+- C'est long
+- Convergence lente et nécessite traitement
+- Problème de traduction des coordonnées globales locales (en traitement)
+> Problème : Normalisation des coo des boxes
+
+# Faster R CNN
+- Réalisation du notebook
+- Mise en place des outils de mesures
+- Piste amélioration : + epoch/+données genre translation,contraste etc/hyperparamètre
+- Début implémentation Faster R-CNN
+- Notebook pour le Faster R-CNN effectué
+- Test sur le dataset coco
+
+# RT DETR
+- Test du notebook
+- A voir par la suite car limitation Colab
+- A optimiser Bacth et autre car plus de GPU
+- En attente de résultat
+
+
+# Recherche perso
+
+Recherche du côté des autres modèles non proposées :
+- RT-DETR est bien pour des petits objets à ce qui parait, de plus il faut juste modifier le model utilisé par ultralytics
+- RC-CNN,est aussi un candidat possible
+- EfficientDet
+
+
+According to Internet :
+High real-time requirements: Choose the YOLO series.
+Limited resources (such as mobile devices): EfficientDet.
+High precision requirements: Choose Faster R-CNN, Mask R-CNN.
+Need to perform detection and segmentation simultaneously: Choose Mask R-CNN.
+Complex scenes and global relationship modeling: Choose DETR.
+
+
+
+
+# Réalisation
+
+> Test sur Yolo (Dataset Coco)
+> Possibilité de passer en RT-DETR avec le même notebook (Yolo)
+> Recherche sur une possible implémentation de Faster R-CNN
+> Réalisation du noteboook modifiable pour le Faster R-CNN
+> Réalisation d'un script afin d'utiliser le modèle Faster R-CNN sur une banque d'images
+> Réalisation d'un script afin d'utiliser le modèle Faster R-CNN sur une cam
+> Test sur Faster R-CNN (Dataset Coco)
+> Essaie d'amélioration du Faster R-CNN (pour contre balancer le fait qu'il faut plus d'images) >> Nécessite grosse database
+> Réalisation d'un notebook pour Deformable-DETR de fundamentalvision,mais déprécié
+> Travail sur le notebook Deformable_DETR de hugging face mais qq soucis sur le wrapper
+> Labelisation de 3 images du dataset 2023
+> Création du RAW dataset
+> Création du notebook pour YoloOlives
+> Test avec 6 images 2023 > Aucun résultats
+> Test avec dataset 2022 > Début de résultats (mAP50 < 0.1)
+> Test avec 2022 + 2023 & augmentation (elle n'était pas vraiment activée) (mAP50 environ = 0.13)
+> Test avec 2022 + 2023 & augmentation & split des images  (0.3 < mAP50 < 0.4)
+> Mise en place d'un script qui split les grandes images en plus petites et les refusionne par la suite car apprentissage sur petite image
+>> Le script fonctionne
+
+> Mise en place du Deformable DETR
+> 
+
+# Labélisation d'une image
+- Mauvaise image de côté
+- Choix des bonnes images
+- CVAT
+-- Il faut mettre le dossier en formes
+
+# Création du dataset de 6 images
+> Labelisation faite
+> Création à la main en format YOLO
+> Réalisation d'un script qui permet de mettre le dataset au format voulu pour le notebook YoloOlives
+> Le dataset 2023 est vraiment pas efficace à lui seul
+
+# Dataset 2022
+> Essai sur le dataset 2022
+
+# Problème 
+> Difficulté à séparer background et olives
+>> Ptet split les images pour la taille (bonne solution,voir réalisation)
+
+# Possible solution
+> masquage de fond ou des méthodes comme CutMix,
+> Canaux RGB
+
+# Differences YOLO
+> Utiliser Yolov8m au lieu de Yolo11x, car plus efficace
+
+
+# Découverte de SAHI
+> Peut être pas mal pour améliorer YOLO pour la détection de petit objet
+
+# Truc en plus
+En fait
+
+Hier Elyes a fait un script qui divise les grandes images en plein de petites images.
+ça donne la mtrice de confusion pas deg, mais à améliorer.
+Sauf que bah après l'ia ne pouvait plus détecter sur les grandes images car manque de détail.
+Donc là ce matin pendant mes conneries, j'ai fait un script qui divise les grandes images en plein de petites pour la prédiction,fait la prédiction,puis refusionne les images.
+
+> Précision = TP / (TP + FP) = 682 / (682 + 253) = 682 / 935 ≈ 0.729
+
+Rappel = TP / (TP + FN) = 682 / (682 + 452) = 682 / 1134 ≈ 0.601
+
+# Explication premier modèle :
+Score | Interprétation | Est-ce bon ? (général)
+Précision | Parmi les prédictions "olive", 72.9 % étaient correctes | Plutôt bon, surtout si tu veux éviter les faux positifs.
+Rappel | Parmi tous les vrais "olive", seulement 60.1 % ont été trouvés | Moyen, car beaucoup de vrais olives sont manqués.
+
+
+# Objectif :
+ capter le maximum de vrais "olive"
+
+Donc 
+L'objectif est de maximiser le rappel pour la classe "olive" — donc ne rater aucun vrai "olive", quitte à avoir quelques erreurs (faux positifs) et minimiser faux négatifs 
+
+
+
+# Question à poser :
+- Temps réel ou pas ?
+- Appareil sur le quel il sera utilisé ?
+- Ressource à disposition ?

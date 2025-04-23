@@ -1,0 +1,6 @@
+yolo task=detect mode=predict model=./my_model.pt source=./img
+
+xdg-open runs/detect/predict/image0.jpg  # (Linux)
+open runs/detect/predict/image0.jpg      # (macOS)
+start runs\detect\predict\image0.jpg     # (Windows)
+
