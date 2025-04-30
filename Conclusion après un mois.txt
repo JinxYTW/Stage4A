@@ -1,0 +1,50 @@
+Le deformable DETR et Yolov8m, ce qui a conclu dans une utilisation de Yolo au lieu de DETR pour l'instant.
+En effet, j'ai 0.8 en précision et recall avec Yolo, si j'ai une conf treshold de 0.05.De plus le modèle ne consomme pas beaucoup de Ram,ni de stockage.
+De l'autre côte,DETR, touche les 0.65 en précision et recall avec une conf de 0.9,mais le training est long.
+
+| Modèle | Architecture | Points clés |
+|--------|--------------|-------------|
+| **YOLOv8m** | CNN rapide + Head optimisé | Optimisé pour la vitesse, faible latence et bon compromis précision/efficacité. |
+| **Deformable DETR** | Transformer (self-attention) avec cross-attention déformable | Très puissant mais coûteux en calcul, surtout pour les petites données. |
+
+YOLO est conçu pour la rapidité et l'efficacité mémoire, là où DETR sacrifie cela pour la flexibilité et la performance sur des cas complexes (par exemple objets chevauchants, scènes denses…).
+
+
+
+YOLO a un head d’ancrage (anchor-based) qui aide à prédire rapidement les objets dès les premières époques.
+
+DETR est anchor-free, et a besoin de beaucoup plus de données et d’entraînement pour apprendre la localisation d'objets.
+
+Le fait que YOLO fonctionne bien avec un conf threshold = 0.05 indique qu’il génère beaucoup de bonnes prédictions même avec peu de confiance initiale.
+
+DETR, avec un conf = 0.9, ne sort que les prédictions les plus sûres, donc en laisse beaucoup passer → ce qui diminue recall.
+
+DETR a des sorties plus “prudentes” et souvent moins bien calibrées si l'entraînement est incomplet.
+
+DETR a besoin de plus de données pour atteindre son plein potentiel, contrairement à YOLO qui est plus robuste sur des datasets plus petits.
+
+Raisons de préférer YOLO :
+
+
+→ les olives sont petites, nombreuses, et parfois en grappes.
+
+YOLOv8 gère très bien ce type de cas grâce à son ancrage multi-échelle (FPN/Neck).
+
+Le dataset est modeste :
+
+DETR a du mal à converger avec peu de données.
+
+YOLO est robuste et efficace même avec peu d’exemples bien annotés.
+
+Besoin de rapidité & faible conso de ressources :
+
+YOLOv8m peut tourner en temps réel sur des machines légères ou embarquées.
+
+DETR est lourd, peu pratique sans GPU puissant et temps d'entraînement long.
+
+
+- A faire :
+> Loss curve & confusion matrix pour présentation
+> Ajouter augmentation à DETR & + epochs
+> Rapport écrit pour les papers
+> Comparer Yolov8m & Yolo11m
