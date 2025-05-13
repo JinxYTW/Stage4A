@@ -1,0 +1,36 @@
+data/obj_train_data/B 11.jpg
+data/obj_train_data/B111.jpg
+data/obj_train_data/B112.jpg
+data/obj_train_data/B12.jpg
+data/obj_train_data/B13.jpg
+data/obj_train_data/B16.jpg
+data/obj_train_data/B17.jpg
+data/obj_train_data/B18.jpg
+data/obj_train_data/Probna.jpg
+data/obj_train_data/B2.1.jpg
+data/obj_train_data/B2.10.jpg
+data/obj_train_data/B2.11.jpg
+data/obj_train_data/B2.12.jpg
+data/obj_train_data/B2.13.jpg
+data/obj_train_data/B2.3.jpg
+data/obj_train_data/B2.7.jpg
+data/obj_train_data/B2.8.jpg
+data/obj_train_data/B2.9.jpg
+data/obj_train_data/20221108_112521.jpg
+data/obj_train_data/20221108_112523.jpg
+data/obj_train_data/20221108_112526.jpg
+data/obj_train_data/20221108_112532.jpg
+data/obj_train_data/20221116_151143.jpg
+data/obj_train_data/20221116_151156.jpg
+data/obj_train_data/IMG_20221123_154036.jpg
+data/obj_train_data/IMG_20221123_154043.jpg
+data/obj_train_data/IMG_20221123_154057.jpg
+data/obj_train_data/IMG_20221123_155340.jpg
+data/obj_train_data/Probne 2_1.jpg
+data/obj_train_data/IMG_20230610_190720.jpg
+data/obj_train_data/IMG_20230811_145524.jpg
+data/obj_train_data/IMG_20231108_122534.jpg
+data/obj_train_data/IMG_20230811_145534.jpg
+data/obj_train_data/IMG_20231007_163938.jpg
+data/obj_train_data/IMG_20231104_105335.jpg
+

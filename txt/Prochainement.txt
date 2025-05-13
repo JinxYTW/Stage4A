@@ -1,0 +1,42 @@
+# Labeler toutes les images
+> Création d'un script afin d'importer sur CVAT et fix manuellement
+> Lors du fix manuelle, on peut apercevoir que les images floues/sombres ont de mauvais résultats
+> Problème sur la couleur dark green
+> Problème si beaucoup trop de feuilles
+> Problème si la lumière fait un rond
+> En moyenne 3 ou 4 FP
+> En moyenne entre 2 et 10 FN
+> Ne pas prendre de photo en contre plongée
+
+# Trier en 3 groupes > Vert/fiftyfifty/Noir
+> Le tri est très subjectif : Vert comporte des olives uniquement vertes/5050 comporte un mix de couleurs d'olives/Black comporte les images où la couleur prédominante est le noir
+
+# Faire 3 sous modèles pour chacun des data
+Quand tu divises ton dataset en trois petits datasets, chaque modèle voit beaucoup moins de variété, et parfois moins d’exemples pour apprendre à généraliser. Cela conduit à :
+
+Overfitting : il apprend trop bien les exemples du train, mais généralise mal sur le test.
+
+Moins de diversité visuelle : les olives vertes/noires/mélangées ont des contextes visuels différents, donc moins de données = moins de robustesse.
+
+Un modèle préentraîné sur un gros dataset (comme COCO) a déjà appris à détecter des formes, textures, contrastes… Il te permet de partir avec une "bonne base" plutôt que d’entraîner à partir de zéro sur peu de données.
+
+Dans YOLOv8 (via Ultralytics), le modèle est déjà préentraîné par défaut, sauf si tu désactives cela. Mais si tu entraînes sur des petits sous-ensembles, tu dois :
+
+Veiller à ne pas trop "oublier" ce qu’il a appris (éviter le sur-apprentissage).
+
+Utiliser fine-tuning léger, pas un entraînement trop long.
+Regarde mAP50-95 sur val : s’il plafonne ou baisse alors que la loss sur train descend → overfit.
+
+# Optimisation faite (fine-tuning)
+
+> J'utilisais déjà un modèle Yolo préentrainé sur COCO, mais pas de gel
+> utilisation de gel
+> Peut être yolov8x est mieux (effectivement)
+> test de passage de imgz à 640 (mieux)
+
+Test de c2 !!
+
+# Travail final : 
+Comparer les résultats Yolov8m,yolo11m,detr,sub-yolov8 non optimisé,sub-yolov optimisé
+
+Test de c2 !!

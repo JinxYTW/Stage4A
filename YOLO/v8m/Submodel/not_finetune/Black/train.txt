@@ -1,0 +1,11 @@
+data/obj_train_data/IMG_20231007_153345.jpg
+data/obj_train_data/IMG_20231007_163841.jpg
+data/obj_train_data/IMG_20231007_164054.jpg
+data/obj_train_data/IMG_20231027_131101.jpg
+data/obj_train_data/IMG_20231027_131106.jpg
+data/obj_train_data/IMG_20231104_105335.jpg
+data/obj_train_data/IMG_20231108_122539.jpg
+data/obj_train_data/B2.10.jpg
+data/obj_train_data/B2.8.jpg
+data/obj_train_data/B2.9.jpg
+data/obj_train_data/20221116_151156.jpg

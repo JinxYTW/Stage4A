@@ -1,0 +1,49 @@
+v8x au lieu de v8m
+640 au lieu de 320
+0.001 au lieu de 0.01
+copy paste et mozaic up
+peut être geler plus de layers ?
+
+
+from ultralytics import YOLO
+
+model = YOLO("yolov8x.pt")  # ou un autre modèle préentraîné
+
+# Geler les premières couches
+for param in model.model.model[0].parameters():
+    param.requires_grad = False
+
+OU
+
+# Geler les 2 ou 3 premiers blocs du backbone (en général C1, C2, C3)
+for i, (name, module) in enumerate(model.model.model[0].named_children()):
+    if i < 3:  # essaie 2, 3 ou 4
+        for param in module.parameters():
+            param.requires_grad = False
+
+
+model.train(
+    data=f"{base_split_path}/data.yaml",
+    epochs=50,
+    device=0,
+    batch=16,
+    imgsz=640,
+    patience=20,
+    optimizer='SGD',
+    lr0=0.001,
+    lrf=0.01,
+    degrees=0.0,
+    translate=0.0,
+    scale=0.5,
+    shear=0.0,
+    perspective=0.0,
+    flipud=0.0,
+    fliplr=0.5,
+    hsv_h=0.02,
+    hsv_s=0.6,
+    hsv_v=0.5,
+    mosaic=0.5,
+    mixup=0.1,
+    copy_paste=0.7,
+    auto_augment='albumentations'
+)
